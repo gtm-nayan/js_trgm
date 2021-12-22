@@ -4,6 +4,7 @@ export function find_trigrams(text: string): Set<string> {
 	const words = text
 		.toLowerCase()
 		.split(/\W+/)
+		.filter((w) => w.length)
 		.map((w) => `  ${w} `);
 	const trigrams = new Set<string>();
 	for (const word of words) {
