@@ -62,6 +62,7 @@ export function trgmSearch(
 	{ limit, threshold = 0.3 }: SearchOptions = {}
 ): Result[] {
 	const results: Result[] = [];
+
 	for (const thing of search_in) {
 		const score = similarity(text, thing);
 		if (score > threshold) {
@@ -72,9 +73,9 @@ export function trgmSearch(
 			insert_at(
 				results,
 				sortedLastIndexBy(results, value, (v) => -v.score),
-				value,
-				limit
+				value
 			);
+			truncate(results, limit);
 		}
 	}
 	return results;
@@ -91,9 +92,17 @@ export interface Result {
  * @param {Array<T>} arr The array to insert the value into.
  * @param {number} index The index to insert the value at.
  * @param {T} to_insert The value to insert.
- * @param {number} limit Truncate the array to this many items after inserting.
  */
-function insert_at<T>(arr: T[], index: number, to_insert: T, limit: number = arr.length + 1): void {
+function insert_at<T>(arr: T[], index: number, to_insert: T): void {
 	arr.splice(index, 0, to_insert);
+}
+
+/**
+ * Truncate an array in place.
+ *
+ * @param {Array<T>} arr The array to truncate.
+ * @param {number} [limit] The number of items to truncate the array to.
+ */
+function truncate<T>(arr: T[], limit: number = arr.length): void {
 	arr.splice(limit, arr.length - limit);
 }
