@@ -1,5 +1,6 @@
 <script>
-	import { trgmSearch } from 'js_trgm';
+	import { trgmSearch, find_trigrams } from 'js_trgm';
+	console.log(find_trigrams)
 
 	const tutorials = {
 		'Basics': 'basics',

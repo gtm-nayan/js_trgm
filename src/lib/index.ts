@@ -1,5 +1,12 @@
 import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy';
 
+/**
+ * Find the unique trigrams in a string.
+ *
+ * @param {string} text - The string to find the trigrams in.
+ *
+ * @returns {Set<string>} A `Set` of the trigrams.
+ */
 export function find_trigrams(text: string): Set<string> {
 	const words = text
 		.toLowerCase()
@@ -83,7 +90,13 @@ export function trgmSearch(
 }
 
 export interface Result {
+	/**
+	 * The similarity of the result string with the search string.
+	 */
 	score: number;
+	/**
+	 * The original result string that matched with the search string.
+	 */
 	target: string;
 }
 
