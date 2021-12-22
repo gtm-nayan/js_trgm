@@ -7,7 +7,7 @@ import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy';
  *
  * @returns {Set<string>} A `Set` of the trigrams.
  */
-export function find_unique_trigrams(text: string): Set<string> {
+export function find_distinct_trigrams(text: string): Set<string> {
 	const words = text
 		.toLowerCase()
 		.split(/\W+/)
@@ -30,8 +30,8 @@ export function find_unique_trigrams(text: string): Set<string> {
  * @returns {number} A number that indicates how similar the two arguments are. The range of the result is `0` (indicating that the two strings are completely dissimilar) to `1` (indicating that the two strings are identical).
  */
 export function similarity(first: string, second: string): number {
-	const tr1 = find_unique_trigrams(first);
-	const tr2 = find_unique_trigrams(second);
+	const tr1 = find_distinct_trigrams(first);
+	const tr2 = find_distinct_trigrams(second);
 
 	let unique = tr1.size;
 	let shared = 0;

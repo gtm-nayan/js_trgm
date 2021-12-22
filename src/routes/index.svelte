@@ -1,6 +1,6 @@
 <script>
-	import { trgmSearch, find_unique_trigrams } from 'js_trgm';
-	console.log(find_unique_trigrams);
+	import { trgmSearch, find_distinct_trigrams } from 'js_trgm';
+	console.log(find_distinct_trigrams);
 
 	const tutorials = {
 		'Basics': 'basics',
