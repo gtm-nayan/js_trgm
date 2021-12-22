@@ -68,7 +68,7 @@ export function trgmSearch(
 		if (score > threshold) {
 			const value: Result = {
 				score,
-				target: thing
+				target: thing,
 			};
 			insert_at(
 				results,

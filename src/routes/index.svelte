@@ -84,7 +84,7 @@
 		'Sharing code': 'sharing-code',
 		'Exports': 'module-exports',
 		'The @debug tag': 'debug',
-		'Congratulations!': 'congratulations'
+		'Congratulations!': 'congratulations',
 	};
 
 	const search_in = Object.keys(tutorials);
