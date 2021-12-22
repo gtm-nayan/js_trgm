@@ -52,6 +52,9 @@ export interface SearchOptions {
  * @param {string} text The string to match against.
  * @param {Iterable<string>} search_in The iterable collection to search for a match in.
  * @param {SearchOptions} [options] Optional parameters for controlling the results.
+ *
+ * @returns {Result[]} An array of result objects with the matching
+ * string from the collection and its similarity score.
  */
 export function trgmSearch(
 	text: string,
@@ -84,18 +87,13 @@ export interface Result {
 
 /**
  * Insert a value into an array at the specified index.
- * 
+ *
  * @param {Array<T>} arr The array to insert the value into.
  * @param {number} index The index to insert the value at.
  * @param {T} to_insert The value to insert.
  * @param {number} limit Truncate the array to this many items after inserting.
  */
-function insert_at<T>(
-	arr: Array<T>,
-	index: number,
-	to_insert: T,
-	limit: number = arr.length + 1
-): void {
+function insert_at<T>(arr: T[], index: number, to_insert: T, limit: number = arr.length + 1): void {
 	arr.splice(index, 0, to_insert);
 	arr.splice(limit, arr.length - limit);
 }
