@@ -14,9 +14,16 @@ export function find_trigrams(text: string): Set<string> {
 	return trigrams;
 }
 
-export function similarity(text1: string, text2: string): number {
-	const tr1 = find_trigrams(text1);
-	const tr2 = find_trigrams(text2);
+/**
+ * Find the similarity between two strings.
+ *
+ * @param {string} first The first string
+ * @param {string} second The second string
+ * @returns {number} A number that indicates how similar the two arguments are. The range of the result is `0` (indicating that the two strings are completely dissimilar) to `1` (indicating that the two strings are identical).
+ */
+export function similarity(first: string, second: string): number {
+	const tr1 = find_trigrams(first);
+	const tr2 = find_trigrams(second);
 
 	let unique = tr1.size;
 	let shared = 0;
@@ -27,16 +34,29 @@ export function similarity(text1: string, text2: string): number {
 	return shared / unique;
 }
 
+export interface SearchOptions {
+	/**
+	 * The max number of results to return.
+	 */
+	limit?: number;
+	/**
+	 * Only consider a result if the {@link similarity} is above this threshold.
+	 * @default 0.3
+	 */
+	threshold?: number;
+}
+
+/**
+ * Use trigrams to search for a match of a string within a collection.
+ *
+ * @param {string} text The string to match against.
+ * @param {Iterable<string>} search_in The iterable collection to search for a match in.
+ * @param {SearchOptions} [options] Optional parameters for controlling the results.
+ */
 export function trgmSearch(
 	text: string,
 	search_in: Iterable<string>,
-	{
-		limit,
-		threshold = 0.3
-	}: {
-		limit?: number;
-		threshold?: number;
-	} = {}
+	{ limit, threshold = 0.3 }: SearchOptions = {}
 ): Result[] {
 	const results: Result[] = [];
 	for (const thing of search_in) {
@@ -46,7 +66,12 @@ export function trgmSearch(
 				score,
 				target: thing
 			};
-			insert_at(results, sortedLastIndexBy(results, value, (v) => -v.score), value, limit);
+			insert_at(
+				results,
+				sortedLastIndexBy(results, value, (v) => -v.score),
+				value,
+				limit
+			);
 		}
 	}
 	return results;
@@ -57,6 +82,14 @@ export interface Result {
 	target: string;
 }
 
+/**
+ * Insert a value into an array at the specified index.
+ * 
+ * @param {Array<T>} arr The array to insert the value into.
+ * @param {number} index The index to insert the value at.
+ * @param {T} to_insert The value to insert.
+ * @param {number} limit Truncate the array to this many items after inserting.
+ */
 function insert_at<T>(
 	arr: Array<T>,
 	index: number,
