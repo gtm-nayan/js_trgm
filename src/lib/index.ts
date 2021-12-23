@@ -67,7 +67,7 @@ export interface SearchOptions {
  * @returns {Result[]} An array of result objects with the matching
  * string from the collection and its similarity score.
  */
-export function trgmSearch(
+export function trgm_search(
 	text: string,
 	search_in: Iterable<string>,
 	{ limit, threshold = 0.3 }: SearchOptions = {}
