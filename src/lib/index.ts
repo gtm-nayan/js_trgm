@@ -27,7 +27,10 @@ export function find_distinct_trigrams(text: string): Set<string> {
  *
  * @param {string} first The first string
  * @param {string} second The second string
- * @returns {number} A number that indicates how similar the two arguments are. The range of the result is `0` (indicating that the two strings are completely dissimilar) to `1` (indicating that the two strings are identical).
+ * @returns {number}
+ * A number that indicates how similar the two arguments are.
+ * The range of the result is `0` (indicating that the two strings are completely dissimilar)
+ * to `1` (indicating that the two strings are identical).
  */
 export function similarity(first: string, second: string): number {
 	const tr1 = find_distinct_trigrams(first);
