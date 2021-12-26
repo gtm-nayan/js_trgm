@@ -1,4 +1,4 @@
-import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy';
+import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy.js';
 
 /**
  * Find the unique trigrams in a string.
@@ -13,12 +13,15 @@ export function find_distinct_trigrams(text: string): Set<string> {
 		.split(/\W+/)
 		.filter((w) => w.length)
 		.map((w) => `  ${w} `);
+
 	const trigrams = new Set<string>();
+
 	for (const word of words) {
 		for (let i = 3; i <= word.length; ++i) {
 			trigrams.add(word.slice(i - 3, i));
 		}
 	}
+
 	return trigrams;
 }
 
@@ -38,6 +41,7 @@ export function similarity(first: string, second: string): number {
 
 	let unique = tr1.size;
 	let shared = 0;
+
 	for (const trigram of tr2) {
 		tr1.has(trigram) ? ++shared : ++unique;
 	}
@@ -76,11 +80,13 @@ export function trgm_search(
 
 	for (const thing of search_in) {
 		const score = similarity(text, thing);
+
 		if (score > threshold) {
 			const value: Result = {
 				score,
 				target: thing,
 			};
+
 			insert_at(
 				results,
 				sortedLastIndexBy(results, value, (v) => -v.score),
