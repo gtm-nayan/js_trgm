@@ -32,5 +32,17 @@
   "type": "module",
   "dependencies": {
     "lodash-es": "^4.17.21"
+  },
+  "keywords": [
+    "js-trgm",
+    "trigram",
+    "trigraphs",
+    "fuzzysearch",
+    "pg_trgm",
+    "fuzzymatch"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gtm-nayan/js_trgm.git"
   }
 }
