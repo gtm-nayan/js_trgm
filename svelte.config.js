@@ -16,11 +16,11 @@ const config = {
 		vite: {
 			resolve: {
 				alias: {
-					js_trgm: path.resolve('src/lib')
-				}
-			}
-		}
-	}
+					js_trgm: path.resolve('src/lib'),
+				},
+			},
+		},
+	},
 };
 
 export default config;
