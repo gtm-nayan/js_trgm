@@ -8,7 +8,7 @@
 export function find_distinct_trigrams(text: string): Set<string> {
 	const words = text
 		.toLowerCase()
-		.split(/\W+/)
+		.split(/[^a-z]+/)
 		.filter((w) => w.length)
 		.map((w) => `  ${w} `);
 
