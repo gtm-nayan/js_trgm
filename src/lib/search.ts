@@ -1,4 +1,4 @@
-import { sortedLastIndexBy } from 'lodash-es';
+import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy.js';
 import { similarity_between_trigram_sets } from './similarity.js';
 import { find_distinct_trigrams } from './trigrams.js';
 import { insert_at, truncate } from './utils.js';
