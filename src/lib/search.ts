@@ -1,7 +1,6 @@
-import sortedLastIndexBy from 'lodash-es/sortedLastIndexBy.js';
 import { similarity_between_trigram_sets } from './similarity.js';
 import { find_distinct_trigrams } from './trigrams.js';
-import { insert_at, truncate } from './utils.js';
+import { find_insertion_point, insert_at, truncate } from './utils.js';
 
 /**
  * Use trigrams to search for a match of a string within a collection.
@@ -35,7 +34,7 @@ export function trgm_search(
 
 			insert_at(
 				results,
-				sortedLastIndexBy(results, value, (v) => -v.score),
+				find_insertion_point(results, value, (a, b) => b.score - a.score),
 				value
 			);
 			truncate(results, limit);
