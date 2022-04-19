@@ -10,11 +10,11 @@ export function find_distinct_trigrams(text: string): Set<string> {
 	text
 		.toLowerCase()
 		.split(/[^a-z]+/)
-		.forEach((w) => {
-			if (w.length) {
-				const s = `  ${w} `;
-				for (let i = 3; i <= s.length; ++i) {
-					trigrams.add(s.slice(i - 3, i));
+		.forEach((word) => {
+			if (word.length) {
+				const padded = `  ${word} `;
+				for (let i = 3; i <= padded.length; ++i) {
+					trigrams.add(padded.slice(i - 3, i));
 				}
 			}
 		});
