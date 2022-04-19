@@ -34,7 +34,7 @@ export function trgm_search(
 
 			insert_at(
 				results,
-				find_insertion_point(results, value, (a, b) => b.score - a.score),
+				find_insertion_point(results, value, (r) => -r.score),
 				value
 			);
 			truncate(results, limit);
