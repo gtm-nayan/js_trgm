@@ -29,11 +29,12 @@ export function find_insertion_point<T>(
 ): number {
 	let low = 0;
 	let high = arr.length;
-
+	const item_val = key(item);
+	
 	while (low < high) {
 		const mid = (low + high) >>> 1;
 
-		if (key(arr[mid]) <= key(item)) {
+		if (key(arr[mid]) <= item_val) {
 			low = mid + 1;
 		} else {
 			high = mid;
