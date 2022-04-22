@@ -25,8 +25,8 @@ export function similarity_between_strings(
 /**
  * Find the similarity between two sets of trigrams.
  *
- * @param {string} first The first string
- * @param {string} second The second string
+ * @param {Set<string>} first The first set of trigrams
+ * @param {Set<string>} second The second set of trigrams
  * @returns {number}
  * A number that indicates how similar the two arguments are.
  * The range of the result is `0` (indicating that the two sets are completely dissimilar)
@@ -40,8 +40,9 @@ export function similarity_between_trigram_sets(
 	let shared = 0;
 
 	for (const trigram of second) {
-		first.has(trigram) ? ++shared : ++unique;
-	}
+		if (first.has(trigram)) ++shared;
+		else ++unique;
+	};
 
 	return shared / unique;
 }
